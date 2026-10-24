@@ -9,122 +9,130 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Amiri', 'Noto Naskh Arabic', serif;
-      background: #f5f5f5;
+      background: #f0f0f0;
       direction: rtl;
       padding: 20px;
     }
-    .container { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.3fr; gap: 20px; }
-    @media (max-width: 1200px) { .container { grid-template-columns: 1fr; } }
 
-    .form-panel { background: white; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); max-height: 92vh; overflow-y: auto; }
-    .form-panel h3 { color: #1F5233; font-size: 15px; margin: 16px 0 12px; font-weight: 700; border-bottom: 2px solid #D4AF37; padding-bottom: 8px; }
+    .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 
-    .form-group { margin-bottom: 12px; }
-    .form-group label { display: block; font-size: 12px; font-weight: 600; color: #1F5233; margin-bottom: 4px; }
-    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 6px 8px; border: 0.5px solid #D4AF37; border-radius: 4px; font-family: inherit; font-size: 13px; }
-    .form-group textarea { min-height: 60px; resize: vertical; }
-    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #1F5233; box-shadow: 0 0 0 2px rgba(31, 82, 51, 0.1); }
-
-    .add-btn { background: #1F5233; color: white; padding: 6px 10px; border: none; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 6px; }
-    .add-btn:hover { background: #163d27; }
-
-    .item-list { font-size: 12px; color: #666; margin-top: 6px; }
-    .item { padding: 4px 6px; background: #f0f4ec; border-radius: 3px; margin: 3px 0; display: flex; justify-content: space-between; align-items: center; }
-    .item-delete { background: none; border: none; color: red; cursor: pointer; font-weight: bold; font-size: 12px; }
-
-    .preview-panel { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); max-height: 92vh; overflow-y: auto; }
-
-    .report { background: white; padding: 35px; text-align: right; }
-
-    .report-header { text-align: center; border-bottom: 3px double #D4AF37; padding-bottom: 18px; margin-bottom: 25px; }
-    .report-title { font-size: 26px; font-weight: 700; color: #1F5233; line-height: 1.4; }
-    .report-subtitle { font-size: 18px; font-weight: 700; color: #D4AF37; margin-top: 6px; }
-    .report-date { font-size: 13px; color: #666; margin-top: 10px; }
-
-    .section-box { border: 1.5px solid #1F5233; border-radius: 6px; margin-bottom: 18px; overflow: hidden; }
-    .section-header { background: #1F5233; color: white; padding: 8px 14px; font-size: 14px; font-weight: 700; text-align: center; }
-    .section-content { padding: 14px; font-size: 14px; line-height: 1.7; }
-
-    .section-content ul { list-style: none; }
-    .section-content li { padding: 5px 0; }
-    .section-content li:before { content: "• "; color: #D4AF37; font-weight: 700; margin-left: 6px; }
-
-    .table-container { overflow-x: auto; margin: 10px 0; }
-    .table-container table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    .table-container th { background: #f6f1de; color: #1F5233; font-weight: 700; padding: 6px; border: 0.5px solid #D4AF37; text-align: right; }
-    .table-container td { padding: 6px; border: 0.5px solid #D4AF37; }
-
-    .buttons { display: flex; gap: 10px; margin-top: 20px; }
-    .btn { flex: 1; padding: 10px; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .toolbar { display: flex; justify-content: flex-end; gap: 8px; padding: 16px 34px 0; }
+    .btn { padding: 8px 14px; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
     .btn-pdf { background: #1F5233; color: white; }
     .btn-pdf:hover { background: #163d27; }
     .btn-png { background: #D4AF37; color: #1F5233; }
     .btn-png:hover { background: #c99f2d; }
 
-    .empty-preview { color: #999; text-align: center; padding: 40px 20px; font-size: 15px; }
+    .report { width: 794px; min-height: 1123px; box-sizing: border-box; background: white; padding: 34px 50px; display: flex; flex-direction: column; gap: 14px; margin: 0 auto; }
+
+    .report-header { text-align: center; border-bottom: 3px double #D4AF37; padding-bottom: 12px; }
+    .report-title { font-size: 34px; font-weight: 700; color: #1F5233; line-height: 1.5; }
+    .report-subtitle { font-size: 22px; font-weight: 700; color: #D4AF37; margin-top: 4px; line-height: 1.5; }
+
+    .section-box { border: 1.5px solid #1F5233; border-radius: 8px; overflow: hidden; }
+    .section-header { text-align: center; background: #1F5233; color: white; padding: 6px 16px; font-size: 18px; font-weight: 700; }
+    .section-content { padding: 10px 18px; font-size: 16px; }
+
+    [contenteditable] { outline: 1px dashed #D4AF37; padding: 2px 4px; border-radius: 2px; min-height: 20px; }
+    [contenteditable]:focus { outline: 2px solid #1F5233; background: #f9f9f9; }
+
+    .field { margin-bottom: 8px; display: flex; align-items: flex-start; gap: 8px; }
+    .field-label { color: #1F5233; font-weight: 700; white-space: nowrap; flex-shrink: 0; }
+    .field-value { flex: 1; }
+
+    input[type="time"], select { font-family: inherit; font-size: 16px; color: #1d2a22; border: none; border-bottom: 1px dotted #8a9a8f; background: transparent; padding: 0 4px; outline: none; }
+
+    @media print {
+      .toolbar { display: none; }
+      [contenteditable] { outline: none; background: none; }
+    }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="form-panel">
-    <h3>معلومات الاجتماع</h3>
-    <div class="form-group">
-      <label>التاريخ</label>
-      <input type="date" id="meetingDate" onchange="updatePreview()" />
-    </div>
-    <div class="form-group">
-      <label>الساعة</label>
-      <input type="time" id="meetingTime" onchange="updatePreview()" />
-    </div>
-    <div class="form-group">
-      <label>المكان</label>
-      <input type="text" id="location" placeholder="Zoom, Google Meet..." onchange="updatePreview()" />
-    </div>
-
-    <h3>الحاضرون</h3>
-    <div class="form-group">
-      <input type="text" id="participantName" placeholder="اسم المشارك" />
-      <button class="add-btn" onclick="addParticipant()">+ إضافة</button>
-    </div>
-    <div id="participantsList" class="item-list"></div>
-
-    <h3>المحاور</h3>
-    <div class="form-group">
-      <textarea id="topicInput" placeholder="محور النقاش"></textarea>
-      <button class="add-btn" onclick="addTopic()">+ إضافة</button>
-    </div>
-    <div id="topicsList" class="item-list"></div>
-
-    <h3>القرارات</h3>
-    <div class="form-group">
-      <textarea id="decisionInput" placeholder="القرار المتخذ"></textarea>
-      <button class="add-btn" onclick="addDecision()">+ إضافة</button>
-    </div>
-    <div id="decisionsList" class="item-list"></div>
-
-    <h3>الإجراءات</h3>
-    <div class="form-group">
-      <label>الإجراء</label>
-      <textarea id="actionDesc" placeholder="وصف الإجراء"></textarea>
-    </div>
-    <div class="form-group">
-      <label>المسؤول</label>
-      <input type="text" id="actionResponsible" placeholder="الاسم" />
-    </div>
-    <div class="form-group">
-      <label>الموعد</label>
-      <input type="date" id="actionDeadline" />
-    </div>
-    <button class="add-btn" onclick="addAction()">+ إضافة</button>
-    <div id="actionsList" class="item-list"></div>
+  <div class="toolbar">
+    <button class="btn btn-pdf" onclick="downloadPDF()">تصدير PDF</button>
+    <button class="btn btn-png" onclick="downloadPNG()">تصدير PNG</button>
   </div>
 
-  <div class="preview-panel">
-    <div id="reportPreview" class="empty-preview">الرجاء ملء المعلومات...</div>
-    <div class="buttons">
-      <button class="btn btn-pdf" onclick="downloadPDF()">📥 PDF</button>
-      <button class="btn btn-png" onclick="downloadPNG()">📥 PNG</button>
+  <div class="report" id="report">
+    <div class="report-header">
+      <div class="report-title">أكاديمية السيرة النبوية</div>
+      <div class="report-subtitle">تقرير الاجتماع</div>
+    </div>
+
+    <div class="section-box">
+      <div class="section-header">1 — بيانات الاجتماع</div>
+      <div class="section-content">
+        <div class="field">
+          <span class="field-label">التاريخ:</span>
+          <div class="field-value"><input type="date" id="dateInput" /></div>
+        </div>
+        <div class="field">
+          <span class="field-label">الوقت:</span>
+          <div class="field-value"><input type="time" id="timeInput" /></div>
+        </div>
+        <div class="field">
+          <span class="field-label">منصة الاجتماع:</span>
+          <div class="field-value"><input type="text" id="platformInput" placeholder="Zoom, Google Meet..." style="width: 100%; border: none; border-bottom: 1px dotted #8a9a8f;" /></div>
+        </div>
+        <div class="field">
+          <span class="field-label">رقم الاجتماع:</span>
+          <div class="field-value" contenteditable="true" id="meetingNumber">---</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-box">
+      <div class="section-header">الحاضرون</div>
+      <div class="section-content">
+        <div contenteditable="true" id="presentsList" style="min-height: 40px; padding: 8px; background: #fafafa; border-radius: 4px;">
+          أضف أسماء الحاضرين هنا...
+        </div>
+      </div>
+    </div>
+
+    <div class="section-box">
+      <div class="section-header">2 — المحاور المناقشة</div>
+      <div class="section-content">
+        <div contenteditable="true" id="topics" style="min-height: 60px; padding: 8px; background: #fafafa; border-radius: 4px; white-space: pre-wrap;">
+• محور أول
+• محور ثاني
+        </div>
+      </div>
+    </div>
+
+    <div class="section-box">
+      <div class="section-header">3 — القرارات المتخذة</div>
+      <div class="section-content">
+        <div contenteditable="true" id="decisions" style="min-height: 60px; padding: 8px; background: #fafafa; border-radius: 4px; white-space: pre-wrap;">
+• قرار أول
+• قرار ثاني
+        </div>
+      </div>
+    </div>
+
+    <div class="section-box">
+      <div class="section-header">4 — الإجراءات المقررة</div>
+      <div class="section-content">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+          <thead>
+            <tr style="background: #f6f1de;">
+              <th style="border: 0.5px solid #D4AF37; padding: 6px; text-align: right; color: #1F5233; font-weight: 700;">الإجراء</th>
+              <th style="border: 0.5px solid #D4AF37; padding: 6px; text-align: right; color: #1F5233; font-weight: 700;">المسؤول</th>
+              <th style="border: 0.5px solid #D4AF37; padding: 6px; text-align: right; color: #1F5233; font-weight: 700;">الموعد</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border: 0.5px solid #D4AF37; padding: 6px; text-align: right;" contenteditable="true">أضف إجراء</td>
+              <td style="border: 0.5px solid #D4AF37; padding: 6px; text-align: right;" contenteditable="true">المسؤول</td>
+              <td style="border: 0.5px solid #D4AF37; padding: 6px; text-align: right;" contenteditable="true">التاريخ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
@@ -133,181 +141,27 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <script>
-let data = { date: '', time: '', location: '', participants: [], topics: [], decisions: [], actions: [] };
-
-function addParticipant() {
-  const input = document.getElementById('participantName');
-  if (input.value.trim()) {
-    data.participants.push(input.value);
-    input.value = '';
-    updateUI();
-  }
-}
-
-function addTopic() {
-  const input = document.getElementById('topicInput');
-  if (input.value.trim()) {
-    data.topics.push(input.value);
-    input.value = '';
-    updateUI();
-  }
-}
-
-function addDecision() {
-  const input = document.getElementById('decisionInput');
-  if (input.value.trim()) {
-    data.decisions.push(input.value);
-    input.value = '';
-    updateUI();
-  }
-}
-
-function addAction() {
-  const desc = document.getElementById('actionDesc').value;
-  const resp = document.getElementById('actionResponsible').value;
-  const deadline = document.getElementById('actionDeadline').value;
-  if (desc.trim() && resp.trim() && deadline) {
-    data.actions.push({ desc, resp, deadline });
-    document.getElementById('actionDesc').value = '';
-    document.getElementById('actionResponsible').value = '';
-    document.getElementById('actionDeadline').value = '';
-    updateUI();
-  }
-}
-
-function removeItem(arr, i) { arr.splice(i, 1); updateUI(); }
-
-function updateUI() {
-  data.date = document.getElementById('meetingDate').value;
-  data.time = document.getElementById('meetingTime').value;
-  data.location = document.getElementById('location').value;
-
-  document.getElementById('participantsList').innerHTML = data.participants.map((p, i) =>
-    `<div class="item"><span>${p}</span><button class="item-delete" onclick="removeItem(data.participants, ${i})">✕</button></div>`
-  ).join('');
-
-  document.getElementById('topicsList').innerHTML = data.topics.map((t, i) =>
-    `<div class="item"><span>${t}</span><button class="item-delete" onclick="removeItem(data.topics, ${i})">✕</button></div>`
-  ).join('');
-
-  document.getElementById('decisionsList').innerHTML = data.decisions.map((d, i) =>
-    `<div class="item"><span>${d}</span><button class="item-delete" onclick="removeItem(data.decisions, ${i})">✕</button></div>`
-  ).join('');
-
-  document.getElementById('actionsList').innerHTML = data.actions.map((a, i) =>
-    `<div class="item"><span>${a.desc} (${a.resp})</span><button class="item-delete" onclick="removeItem(data.actions, ${i})">✕</button></div>`
-  ).join('');
-
-  generatePreview();
-}
-
-function generatePreview() {
-  if (!data.date && data.participants.length === 0 && data.topics.length === 0) {
-    document.getElementById('reportPreview').innerHTML = '<div class="empty-preview">الرجاء ملء المعلومات...</div>';
-    return;
-  }
-
-  const dateObj = new Date(data.date + 'T00:00:00');
-  const dateStr = data.date ? dateObj.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : '---';
-
-  const html = `
-    <div class="report">
-      <div class="report-header">
-        <div class="report-title">أكاديمية السيرة النبوية</div>
-        <div class="report-subtitle">تقرير الاجتماع</div>
-        <div class="report-date">${dateStr}</div>
-      </div>
-
-      <div class="section-box">
-        <div class="section-header">1 — بيانات الاجتماع</div>
-        <div class="section-content">
-          <div style="margin-bottom: 6px;"><strong>التاريخ:</strong> ${dateStr}</div>
-          <div style="margin-bottom: 6px;"><strong>الساعة:</strong> ${data.time || '---'}</div>
-          <div style="margin-bottom: 6px;"><strong>المكان:</strong> ${data.location || '---'}</div>
-          <div style="margin-bottom: 6px;"><strong>الحاضرون:</strong> ${data.participants.length}</div>
-        </div>
-      </div>
-
-      ${data.participants.length > 0 ? `
-      <div class="section-box">
-        <div class="section-header">الحاضرون</div>
-        <div class="section-content">
-          <ul>${data.participants.map(p => `<li>${p}</li>`).join('')}</ul>
-        </div>
-      </div>` : ''}
-
-      ${data.topics.length > 0 ? `
-      <div class="section-box">
-        <div class="section-header">2 — المحاور المناقشة</div>
-        <div class="section-content">
-          <ul>${data.topics.map(t => `<li>${t}</li>`).join('')}</ul>
-        </div>
-      </div>` : ''}
-
-      ${data.decisions.length > 0 ? `
-      <div class="section-box">
-        <div class="section-header">3 — القرارات المتخذة</div>
-        <div class="section-content">
-          <ul>${data.decisions.map(d => `<li>${d}</li>`).join('')}</ul>
-        </div>
-      </div>` : ''}
-
-      ${data.actions.length > 0 ? `
-      <div class="section-box">
-        <div class="section-header">4 — الإجراءات المقررة</div>
-        <div class="section-content">
-          <div class="table-container">
-            <table>
-              <thead><tr>
-                <th>الإجراء</th>
-                <th>المسؤول</th>
-                <th>الموعد</th>
-              </tr></thead>
-              <tbody>
-                ${data.actions.map(a => `<tr><td>${a.desc}</td><td>${a.resp}</td><td>${a.deadline}</td></tr>`).join('')}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>` : ''}
-    </div>
-  `;
-
-  document.getElementById('reportPreview').innerHTML = html;
-}
-
 function downloadPDF() {
-  const reportElement = document.querySelector('.report');
-  if (!reportElement || !data.date) {
-    alert('الرجاء ملء التاريخ على الأقل');
-    return;
-  }
-
-  html2pdf().set({
-    margin: 10,
-    filename: `rapport-${data.date}.pdf`,
+  const reportElement = document.getElementById('report');
+  const opt = {
+    margin: 0,
+    filename: `rapport-reunion-${new Date().toISOString().split('T')[0]}.pdf`,
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 2 },
     jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
-  }).from(reportElement).save();
+  };
+  html2pdf().set(opt).from(reportElement).save();
 }
 
 function downloadPNG() {
-  const reportElement = document.querySelector('.report');
-  if (!reportElement || !data.date) {
-    alert('الرجاء ملء التاريخ على الأقل');
-    return;
-  }
-
+  const reportElement = document.getElementById('report');
   html2canvas(reportElement, { scale: 2, backgroundColor: '#ffffff' }).then(canvas => {
     const link = document.createElement('a');
     link.href = canvas.toDataURL('image/png');
-    link.download = `rapport-${data.date}.png`;
+    link.download = `rapport-reunion-${new Date().toISOString().split('T')[0]}.png`;
     link.click();
   });
 }
-
-generatePreview();
 </script>
 
 </body>
