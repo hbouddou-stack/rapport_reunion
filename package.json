@@ -1,0 +1,13 @@
+{
+  "name": "rapport-reunion",
+  "version": "1.0.0",
+  "description": "Outil de génération de rapports de réunion",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
