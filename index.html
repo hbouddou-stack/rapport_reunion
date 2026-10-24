@@ -11,7 +11,12 @@
 <body>
 <div data-screen-label="Rapport" style="width:794px;min-height:1123px;box-sizing:border-box;background:#ffffff;padding:34px 50px;display:flex;flex-direction:column;gap:14px;font-family:'Amiri','Noto Naskh Arabic',serif;direction:rtl;color:#1d2a22;margin:0 auto">
 
-  <div class="no-print" style="display:flex;justify-content:flex-end;gap:8px"><button type="button" onclick="downloadPDF()" style="font-family:inherit;font-size:15px;color:#ffffff;background:#1F5233;border:none;border-radius:6px;padding:6px 16px;cursor:pointer">تصدير PDF</button><button type="button" onclick="downloadPNG()" style="font-family:inherit;font-size:15px;color:#1F5233;background:#D4AF37;border:none;border-radius:6px;padding:6px 16px;cursor:pointer;font-weight:600">تصدير PNG</button></div>
+  <div class="no-print" style="display:flex;justify-content:flex-end;gap:8px">
+    <button type="button" onclick="openTemplateMenu()" style="font-family:inherit;font-size:13px;color:#ffffff;background:#666;border:none;border-radius:6px;padding:6px 12px;cursor:pointer">🔹 قالب</button>
+    <button type="button" onclick="openTeamFill()" style="font-family:inherit;font-size:13px;color:#ffffff;background:#666;border:none;border-radius:6px;padding:6px 12px;cursor:pointer">👥 فريق</button>
+    <button type="button" onclick="downloadPDF()" style="font-family:inherit;font-size:15px;color:#ffffff;background:#1F5233;border:none;border-radius:6px;padding:6px 16px;cursor:pointer">تصدير PDF</button>
+    <button type="button" onclick="downloadPNG()" style="font-family:inherit;font-size:15px;color:#1F5233;background:#D4AF37;border:none;border-radius:6px;padding:6px 16px;cursor:pointer;font-weight:600">تصدير PNG</button>
+  </div>
   <div style="text-align:center;border-bottom:3px double #D4AF37;padding-bottom:12px">
     <div style="font-size:34px;font-weight:700;color:#1F5233;line-height:1.5">أكاديمية السيرة النبوية</div>
     <div style="font-size:22px;font-weight:700;color:#D4AF37;margin-top:4px;line-height:1.5">تقرير الاجتماع</div>
@@ -127,8 +132,9 @@
 <script>
 let state = { presents: [], absents: [], excused: [], topicCnt: 1, decisionCnt: 1, doneCnt: 1, nextCnt: 1 };
 const members = ['محمد', 'فاطمة', 'علي', 'عائشة'];
+let draggedRow = null;
 
-// Gérer le champ "مخصص" pour la durée
+// Initialize
 document.addEventListener('DOMContentLoaded', () => {
   const durationSelects = document.querySelectorAll('select[style*="width:120px"]');
   durationSelects.forEach(select => {
@@ -144,7 +150,129 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
+  enableDragDrop();
 });
+
+// ===== FEATURE 1: TEAM PRE-FILL =====
+function openTeamFill() {
+  const input = prompt('أدخل أسماء الفريق (مفصولة بفواصل):\nEx: محمد, فاطمة, علي', '');
+  if (input === null) return;
+  const names = input.split(',').map(n => n.trim()).filter(n => n);
+  state.presents = [];
+  names.forEach(n => { if (n && !state.presents.includes(n)) state.presents.push(n); });
+  renderPresents();
+}
+
+// ===== FEATURE 2: TEMPLATES =====
+function openTemplateMenu() {
+  const templates = JSON.parse(localStorage.getItem('actionTemplates') || '{}');
+  let menu = 'اختر خيارًا:\n\n';
+  menu += '1 = حفظ قالب جديد\n';
+  const keys = Object.keys(templates);
+  keys.forEach((k, i) => { menu += `${i+2} = ${k}\n`; });
+  const choice = prompt(menu + '\n0 = إلغاء');
+  if (choice === null || choice === '0') return;
+
+  if (choice === '1') {
+    const name = prompt('اسم القالب:');
+    if (!name) return;
+    const done = [];
+    const next = [];
+    document.getElementById('doneTable').querySelectorAll('tbody tr').forEach(tr => {
+      done.push({
+        action: tr.cells[1].textContent,
+        responsible: tr.querySelector('select')?.value || '',
+        date: tr.querySelector('input[type="date"]')?.value || ''
+      });
+    });
+    document.getElementById('nextTable').querySelectorAll('tbody tr').forEach(tr => {
+      next.push({
+        action: tr.cells[1].textContent,
+        responsible: tr.querySelector('select')?.value || '',
+        date: tr.querySelector('input[type="date"]')?.value || ''
+      });
+    });
+    templates[name] = { done, next };
+    localStorage.setItem('actionTemplates', JSON.stringify(templates));
+    alert('✅ تم حفظ القالب: ' + name);
+  } else {
+    const idx = parseInt(choice) - 2;
+    if (idx >= 0 && idx < keys.length) {
+      const tmpl = templates[keys[idx]];
+      clearActionTables();
+      tmpl.done.forEach(a => addDoneRowFromTemplate(a));
+      tmpl.next.forEach(a => addNextRowFromTemplate(a));
+      alert('✅ تم تحميل القالب: ' + keys[idx]);
+    }
+  }
+}
+
+function addDoneRowFromTemplate(data) {
+  const n = ++state.doneCnt;
+  const tbody = document.getElementById('doneTable').querySelector('tbody');
+  const newRow = document.createElement('tr');
+  newRow.innerHTML = `<td style="border:1px solid #cfc7a6;text-align:center;color:#D4AF37;font-weight:700;padding:4px">${n}</td><td contentEditable="true" style="border:1px solid #cfc7a6;padding:4px 8px;height:28px;outline:none" onkeypress="if(event.key==='Enter'){event.preventDefault();addDoneRow();}">${data.action}</td><td style="border:1px solid #cfc7a6;padding:2px 4px"><select style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none"><option>— اختر —</option><option>محمد</option><option>فاطمة</option></select></td><td style="border:1px solid #cfc7a6;padding:2px 4px"><input type="date" style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none" value="${data.date}"></td><td class="no-print" style="border:1px solid #cfc7a6;text-align:center;padding:0"><button style="border:none;background:none;color:#8a2b2b;font-size:18px;cursor:pointer;padding:0 4px">×</button></td>`;
+  newRow.querySelector('select').value = data.responsible;
+  newRow.querySelector('button').onclick = () => { newRow.remove(); };
+  addDragDrop(newRow);
+  tbody.appendChild(newRow);
+}
+
+function addNextRowFromTemplate(data) {
+  const n = ++state.nextCnt;
+  const tbody = document.getElementById('nextTable').querySelector('tbody');
+  const newRow = document.createElement('tr');
+  newRow.innerHTML = `<td style="border:1px solid #cfc7a6;text-align:center;color:#D4AF37;font-weight:700;padding:4px">${n}</td><td contentEditable="true" style="border:1px solid #cfc7a6;padding:4px 8px;height:28px;outline:none" onkeypress="if(event.key==='Enter'){event.preventDefault();addNextRow();}">${data.action}</td><td style="border:1px solid #cfc7a6;padding:2px 4px"><select style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none"><option>— اختر —</option><option>محمد</option><option>فاطمة</option></select></td><td style="border:1px solid #cfc7a6;padding:2px 4px"><input type="date" style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none" value="${data.date}"></td><td class="no-print" style="border:1px solid #cfc7a6;text-align:center;padding:0"><button style="border:none;background:none;color:#8a2b2b;font-size:18px;cursor:pointer;padding:0 4px">×</button></td>`;
+  newRow.querySelector('select').value = data.responsible;
+  newRow.querySelector('button').onclick = () => { newRow.remove(); };
+  addDragDrop(newRow);
+  tbody.appendChild(newRow);
+}
+
+function clearActionTables() {
+  state.doneCnt = 0;
+  state.nextCnt = 0;
+  document.getElementById('doneTable').querySelectorAll('tbody tr').forEach(tr => tr.remove());
+  document.getElementById('nextTable').querySelectorAll('tbody tr').forEach(tr => tr.remove());
+}
+
+// ===== FEATURE 3 & 4: DUPLICATION & DRAG-DROP =====
+function cloneRow(btn) {
+  const row = btn.closest('tr');
+  const clone = row.cloneNode(true);
+  clone.style.cssText = (clone.style.cssText || '') + ';opacity:0.7;border-left:3px solid #D4AF37';
+  clone.querySelectorAll('button')[0].onclick = () => { clone.remove(); };
+  clone.querySelectorAll('button')[1].onclick = () => { cloneRow(clone.querySelectorAll('button')[1]); };
+  row.parentNode.insertBefore(clone, row.nextSibling);
+  addDragDrop(clone);
+}
+
+function enableDragDrop() {
+  document.getElementById('doneTable').querySelectorAll('tbody tr').forEach(tr => addDragDrop(tr));
+  document.getElementById('nextTable').querySelectorAll('tbody tr').forEach(tr => addDragDrop(tr));
+}
+
+function addDragDrop(row) {
+  row.draggable = true;
+  row.addEventListener('dragstart', (e) => { draggedRow = row; e.dataTransfer.effectAllowed = 'move'; });
+  row.addEventListener('dragover', (e) => { e.preventDefault(); row.style.borderTop = '2px solid #D4AF37'; });
+  row.addEventListener('dragleave', () => { row.style.borderTop = ''; });
+  row.addEventListener('drop', (e) => {
+    e.preventDefault();
+    if (draggedRow && draggedRow !== row) {
+      row.parentNode.insertBefore(draggedRow, row);
+    }
+    row.style.borderTop = '';
+  });
+}
+
+// ===== FEATURE 5: VALIDATION =====
+function validateBeforeExport() {
+  const date = document.querySelector('input[type="date"]#dateInput').value;
+  if (!date) { alert('⚠️ يرجى إدخال التاريخ'); return false; }
+  if (state.presents.length === 0) { alert('⚠️ أضف على الأقل شخص واحد للحاضرين'); return false; }
+  return true;
+}
 
 function renderPresents() {
   document.getElementById('presentsList').innerHTML = state.presents.map((p, i) =>
@@ -193,8 +321,9 @@ function addDoneRow() {
   const n = ++state.doneCnt;
   const tbody = document.getElementById('doneTable').querySelector('tbody');
   const newRow = document.createElement('tr');
-  newRow.innerHTML = `<td style="border:1px solid #cfc7a6;text-align:center;color:#D4AF37;font-weight:700;padding:4px">${n}</td><td contentEditable="true" style="border:1px solid #cfc7a6;padding:4px 8px;height:28px;outline:none" onkeypress="if(event.key==='Enter'){event.preventDefault();addDoneRow();}"></td><td style="border:1px solid #cfc7a6;padding:2px 4px"><select style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none"><option>— اختر —</option><option>محمد</option><option>فاطمة</option></select></td><td style="border:1px solid #cfc7a6;padding:2px 4px"><input type="date" style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none"></td><td class="no-print" style="border:1px solid #cfc7a6;text-align:center;padding:0"><button style="border:none;background:none;color:#8a2b2b;font-size:18px;cursor:pointer;padding:0 4px">×</button></td>`;
-  newRow.querySelector('button').onclick = () => { newRow.remove(); };
+  newRow.innerHTML = `<td style="border:1px solid #cfc7a6;text-align:center;color:#D4AF37;font-weight:700;padding:4px">${n}</td><td contentEditable="true" style="border:1px solid #cfc7a6;padding:4px 8px;height:28px;outline:none" onkeypress="if(event.key==='Enter'){event.preventDefault();addDoneRow();}"></td><td style="border:1px solid #cfc7a6;padding:2px 4px"><select style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none"><option>— اختر —</option><option>محمد</option><option>فاطمة</option></select></td><td style="border:1px solid #cfc7a6;padding:2px 4px"><input type="date" style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none"></td><td class="no-print" style="border:1px solid #cfc7a6;text-align:center;padding:0"><button style="border:none;background:none;color:#8a2b2b;font-size:18px;cursor:pointer;padding:0 4px">×</button><button style="border:none;background:none;color:#D4AF37;font-size:16px;cursor:pointer;padding:0 4px;margin-right:4px" onclick="cloneRow(this)">📋</button></td>`;
+  newRow.querySelector('td:last-child').querySelector('button:first-child').onclick = () => { newRow.remove(); };
+  addDragDrop(newRow);
   tbody.appendChild(newRow);
   newRow.querySelector('[contentEditable]').focus();
 }
@@ -203,44 +332,36 @@ function addNextRow() {
   const n = ++state.nextCnt;
   const tbody = document.getElementById('nextTable').querySelector('tbody');
   const newRow = document.createElement('tr');
-  newRow.innerHTML = `<td style="border:1px solid #cfc7a6;text-align:center;color:#D4AF37;font-weight:700;padding:4px">${n}</td><td contentEditable="true" style="border:1px solid #cfc7a6;padding:4px 8px;height:28px;outline:none" onkeypress="if(event.key==='Enter'){event.preventDefault();addNextRow();}"></td><td style="border:1px solid #cfc7a6;padding:2px 4px"><select style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none"><option>— اختر —</option><option>محمد</option><option>فاطمة</option></select></td><td style="border:1px solid #cfc7a6;padding:2px 4px"><input type="date" style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none"></td><td class="no-print" style="border:1px solid #cfc7a6;text-align:center;padding:0"><button style="border:none;background:none;color:#8a2b2b;font-size:18px;cursor:pointer;padding:0 4px">×</button></td>`;
-  newRow.querySelector('button').onclick = () => { newRow.remove(); };
+  newRow.innerHTML = `<td style="border:1px solid #cfc7a6;text-align:center;color:#D4AF37;font-weight:700;padding:4px">${n}</td><td contentEditable="true" style="border:1px solid #cfc7a6;padding:4px 8px;height:28px;outline:none" onkeypress="if(event.key==='Enter'){event.preventDefault();addNextRow();}"></td><td style="border:1px solid #cfc7a6;padding:2px 4px"><select style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none"><option>— اختر —</option><option>محمد</option><option>فاطمة</option></select></td><td style="border:1px solid #cfc7a6;padding:2px 4px"><input type="date" style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none"></td><td class="no-print" style="border:1px solid #cfc7a6;text-align:center;padding:0"><button style="border:none;background:none;color:#8a2b2b;font-size:18px;cursor:pointer;padding:0 4px">×</button><button style="border:none;background:none;color:#D4AF37;font-size:16px;cursor:pointer;padding:0 4px;margin-right:4px" onclick="cloneRow(this)">📋</button></td>`;
+  newRow.querySelector('td:last-child').querySelector('button:first-child').onclick = () => { newRow.remove(); };
+  addDragDrop(newRow);
   tbody.appendChild(newRow);
   newRow.querySelector('[contentEditable]').focus();
 }
 
 function downloadPDF() {
+  if (!validateBeforeExport()) return;
   const element = document.querySelector('[data-screen-label="Rapport"]');
   html2pdf().set({ margin: 0, filename: `rapport-${new Date().toISOString().split('T')[0]}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' } }).from(element).save();
 }
 
 function downloadPNG() {
+  if (!validateBeforeExport()) return;
   const original = document.querySelector('[data-screen-label="Rapport"]');
   const clone = original.cloneNode(true);
-
-  // Enlever tous les éléments .no-print
   clone.querySelectorAll('.no-print').forEach(el => el.style.display = 'none');
-
-  // Enlever tous les .no-print-select et remplacer par du texte
   clone.querySelectorAll('.no-print-select').forEach(select => {
     const span = document.createElement('span');
     span.textContent = '— اختر —';
     span.style.color = '#999';
     select.parentNode.replaceChild(span, select);
   });
-
-  // Créer un conteneur temporaire
   const container = document.createElement('div');
-  container.style.position = 'fixed';
-  container.style.left = '-9999px';
-  container.style.top = '-9999px';
+  container.style.cssText = 'position:fixed;left:-9999px;top:-9999px';
   container.appendChild(clone);
   document.body.appendChild(container);
-
-  // Exporter en PNG
   html2canvas(clone, { scale: 2, backgroundColor: '#ffffff', allowTaint: true, useCORS: true }).then(canvas => {
     document.body.removeChild(container);
-
     const link = document.createElement('a');
     link.href = canvas.toDataURL('image/png');
     link.download = `rapport-${new Date().toISOString().split('T')[0]}.png`;
