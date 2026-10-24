@@ -1,360 +1,258 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>تقرير الاجتماع - أكاديمية السيرة النبوية</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Amiri', 'Noto Naskh Arabic', serif;
-      background: #f5f5f5;
-      direction: rtl;
-      padding: 20px;
-    }
-    .container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; }
-    @media (max-width: 1000px) { .container { grid-template-columns: 1fr; } }
-
-    .form-panel { background: white; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); max-height: 90vh; overflow-y: auto; }
-    .form-panel h3 { color: #1F5233; font-size: 16px; margin: 16px 0 12px; font-weight: 700; border-bottom: 2px solid #D4AF37; padding-bottom: 8px; }
-
-    .form-group { margin-bottom: 14px; }
-    .form-group label { display: block; font-size: 13px; font-weight: 600; color: #1F5233; margin-bottom: 6px; }
-    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 8px 10px; border: 0.5px solid #D4AF37; border-radius: 6px; font-family: inherit; font-size: 14px; }
-    .form-group textarea { min-height: 70px; resize: vertical; }
-    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #1F5233; box-shadow: 0 0 0 2px rgba(31, 82, 51, 0.1); }
-
-    .add-btn { background: #1F5233; color: white; padding: 8px 12px; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 8px; }
-    .add-btn:hover { background: #163d27; }
-
-    .item-list { font-size: 13px; color: #666; margin-top: 8px; }
-    .item { padding: 6px; background: #f0f4ec; border-radius: 4px; margin: 4px 0; display: flex; justify-content: space-between; align-items: center; }
-    .item-delete { background: none; border: none; color: red; cursor: pointer; font-weight: bold; }
-
-    .preview-panel { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); max-height: 90vh; overflow-y: auto; }
-
-    .report { background: white; padding: 40px; text-align: right; }
-
-    .report-header { text-align: center; border-bottom: 3px double #D4AF37; padding-bottom: 20px; margin-bottom: 30px; }
-    .report-title { font-size: 28px; font-weight: 700; color: #1F5233; line-height: 1.4; }
-    .report-subtitle { font-size: 20px; font-weight: 700; color: #D4AF37; margin-top: 8px; }
-    .report-date { font-size: 14px; color: #666; margin-top: 12px; }
-
-    .section-box { border: 1.5px solid #1F5233; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }
-    .section-header { background: #1F5233; color: white; padding: 10px 16px; font-size: 16px; font-weight: 700; text-align: center; }
-    .section-content { padding: 16px; font-size: 15px; line-height: 1.8; }
-
-    .section-content ul { list-style: none; }
-    .section-content li { padding: 6px 0; }
-    .section-content li:before { content: "• "; color: #D4AF37; font-weight: 700; margin-left: 8px; }
-
-    .table-container { overflow-x: auto; margin: 12px 0; }
-    .table-container table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    .table-container th { background: #f6f1de; color: #1F5233; font-weight: 700; padding: 8px; border: 0.5px solid #D4AF37; text-align: right; }
-    .table-container td { padding: 8px; border: 0.5px solid #D4AF37; }
-
-    .buttons { display: flex; gap: 12px; margin-top: 24px; }
-    .btn { flex: 1; padding: 12px; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-    .btn-pdf { background: #1F5233; color: white; }
-    .btn-pdf:hover { background: #163d27; }
-    .btn-png { background: #D4AF37; color: #1F5233; }
-    .btn-png:hover { background: #c99f2d; }
-
-    .empty-preview { color: #999; text-align: center; padding: 40px; font-size: 16px; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
 <body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap">
+  <meta name="design_doc_mode" content="canvas">
+  <link rel="stylesheet" href="_ds/organic-0fbeb878-10dd-4a47-a4f7-42badea81afc/styles.css">
+  <script src="_ds/organic-0fbeb878-10dd-4a47-a4f7-42badea81afc/_ds_bundle.js"></script>
+  <style>@media print{.no-print{display:none!important}}</style>
+</helmet>
+<div data-screen-label="Rapport" style="width:794px;min-height:1123px;box-sizing:border-box;background:#ffffff;padding:34px 50px;display:flex;flex-direction:column;gap:14px;font-family:'Amiri','Noto Naskh Arabic',serif;direction:rtl;color:#1d2a22;margin:0 auto">
 
-<div class="container">
-  <div class="form-panel">
-    <h3>معلومات الاجتماع</h3>
-
-    <div class="form-group">
-      <label>التاريخ</label>
-      <input type="date" id="meetingDate" onchange="updatePreview()" />
-    </div>
-
-    <div class="form-group">
-      <label>الساعة</label>
-      <input type="time" id="meetingTime" onchange="updatePreview()" />
-    </div>
-
-    <div class="form-group">
-      <label>مكان الاجتماع</label>
-      <input type="text" id="location" placeholder="مثال: Zoom, Google Meet" onchange="updatePreview()" />
-    </div>
-
-    <h3>الحاضرون</h3>
-    <div class="form-group">
-      <input type="text" id="participantName" placeholder="اسم المشارك" />
-      <button class="add-btn" onclick="addParticipant()">+ إضافة مشارك</button>
-    </div>
-    <div id="participantsList" class="item-list"></div>
-
-    <h3>المحاور المناقشة</h3>
-    <div class="form-group">
-      <textarea id="topicInput" placeholder="اكتب محور النقاش"></textarea>
-      <button class="add-btn" onclick="addTopic()">+ إضافة محور</button>
-    </div>
-    <div id="topicsList" class="item-list"></div>
-
-    <h3>القرارات المتخذة</h3>
-    <div class="form-group">
-      <textarea id="decisionInput" placeholder="اكتب القرار المتخذ"></textarea>
-      <button class="add-btn" onclick="addDecision()">+ إضافة قرار</button>
-    </div>
-    <div id="decisionsList" class="item-list"></div>
-
-    <h3>الإجراءات</h3>
-    <div class="form-group">
-      <label>الإجراء</label>
-      <textarea id="actionDesc" placeholder="وصف الإجراء"></textarea>
-    </div>
-    <div class="form-group">
-      <label>المسؤول</label>
-      <input type="text" id="actionResponsible" placeholder="اسم المسؤول" />
-    </div>
-    <div class="form-group">
-      <label>الموعد النهائي</label>
-      <input type="date" id="actionDeadline" />
-    </div>
-    <button class="add-btn" onclick="addAction()">+ إضافة إجراء</button>
-    <div id="actionsList" class="item-list"></div>
+  <div class="no-print" style="display:flex;justify-content:flex-end;gap:8px"><button type="button" onClick="{{ exportPdf }}" style="font-family:inherit;font-size:15px;color:#ffffff;background:#1F5233;border:none;border-radius:6px;padding:6px 16px;cursor:pointer">تصدير PDF</button><button type="button" onClick="{{ exportPng }}" style="font-family:inherit;font-size:15px;color:#1F5233;background:#D4AF37;border:none;border-radius:6px;padding:6px 16px;cursor:pointer;font-weight:600">تصدير PNG</button></div>
+  <div style="text-align:center;border-bottom:3px double #D4AF37;padding-bottom:12px">
+    <div style="font-size:34px;font-weight:700;color:#1F5233;line-height:1.5">أكاديمية السيرة النبوية</div>
+    <div style="font-size:22px;font-weight:700;color:#D4AF37;margin-top:4px;line-height:1.5">تقرير الاجتماع</div>
   </div>
 
-  <div class="preview-panel">
-    <div id="reportPreview" class="empty-preview">الرجاء ملء المعلومات للعرض المسبق...</div>
-    <div class="buttons">
-      <button class="btn btn-pdf" onclick="downloadPDF()">📥 تصدير PDF</button>
-      <button class="btn btn-png" onclick="downloadPNG()">📥 تصدير PNG</button>
+  <div style="border:1.5px solid #1F5233;border-radius:8px;overflow:hidden;flex-shrink:0">
+    <div style="text-align:center;background:#1F5233;color:#ffffff;padding:6px 16px;font-size:18px;font-weight:700">1 — بيانات الاجتماع</div>
+    <div style="padding:10px 18px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px 20px;font-size:16px">
+      <div style="grid-column:1 / -1;text-align:center;font-size:16px;font-weight:700;color:#1F5233;background:#eef3ec;border-radius:6px;padding:4px 8px">1.1 — التاريخ</div><div style="grid-column:1 / 2;display:flex;align-items:flex-start;gap:8px"><span style="color:#1F5233;font-weight:700;white-space:nowrap;padding-top:4px">1. التاريخ:</span><div style="flex:1;min-width:0"><button type="button" onClick="{{ toggleCal }}" style="width:100%;font-family:inherit;font-size:17px;color:#1d2a22;background:transparent;border:none;border-bottom:1px dotted #8a9a8f;padding:4px 4px;cursor:pointer;text-align:right">{{ dateLabel }}</button><div class="no-print" style="{{ calBoxStyle }}margin-top:6px;background:#ffffff;border:1px solid #D4AF37;border-radius:8px;padding:8px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><button type="button" onClick="{{ prevMonth }}" style="font-family:inherit;font-size:18px;color:#1F5233;background:#f6f1de;border:none;border-radius:999px;width:32px;height:32px;cursor:pointer">›</button><span style="font-size:17px;font-weight:700;color:#1F5233">{{ calTitle }}</span><button type="button" onClick="{{ nextMonth }}" style="font-family:inherit;font-size:18px;color:#1F5233;background:#f6f1de;border:none;border-radius:999px;width:32px;height:32px;cursor:pointer">‹</button></div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center;font-size:13px;color:#5b6a60;margin-bottom:4px"><span>أحد</span><span>اثن</span><span>ثلا</span><span>أرب</span><span>خمي</span><span>جمع</span><span>سبت</span></div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px"><sc-for list="{{ calCells }}" as="c" hint-placeholder-count="0"><button type="button" onClick="{{ c.pick }}" style="{{ c.style }}">{{ c.label }}</button></sc-for></div></div></div></div>
+      <div style="display:flex;align-items:flex-end;gap:8px"><span style="color:#1F5233;font-weight:700;white-space:nowrap">2. الوقت:</span><input type="time" style="width:110px;flex:0 0 auto;font-family:inherit;font-size:16px;color:#1d2a22;border:none;border-bottom:1px dotted #8a9a8f;background:transparent;padding:0 4px;outline:none"></div><div style="display:flex;align-items:flex-end;gap:8px"><span style="color:#1F5233;font-weight:700;white-space:nowrap">المدة:</span><select style="width:120px;flex:0 0 auto;font-family:inherit;font-size:16px;color:#1d2a22;border:none;border-bottom:1px dotted #8a9a8f;background:transparent;padding:0 4px;outline:none"><option value="">— اختر —</option><sc-for list="{{ durations }}" as="x" hint-placeholder-count="0"><option value="{{ x.v }}">{{ x.l }}</option></sc-for></select></div><div style="grid-column:1 / -1;text-align:center;font-size:16px;font-weight:700;color:#1F5233;background:#eef3ec;border-radius:6px;padding:4px 8px;margin-top:4px">1.2 — الاجتماع</div>
+      <div style="display:flex;align-items:flex-end;gap:8px"><span style="color:#1F5233;font-weight:700;white-space:nowrap">3. رقم الاجتماع:</span><select style="flex:1;min-width:0;font-family:inherit;font-size:17px;color:#1d2a22;border:none;border-bottom:1px dotted #8a9a8f;background:transparent;padding:0 4px;outline:none"><option value="">— اختر —</option><sc-for list="{{ meetingNos }}" as="x" hint-placeholder-count="0"><option value="{{ x.n }}">#{{ x.n }}</option></sc-for></select></div>
+      <div style="display:flex;align-items:flex-end;gap:8px"><span style="color:#1F5233;font-weight:700;white-space:nowrap">4. منصة الاجتماع:</span><select style="flex:1;min-width:0;font-family:inherit;font-size:17px;color:#1d2a22;border:none;border-bottom:1px dotted #8a9a8f;background:transparent;padding:0 4px;outline:none"><option value="">— اختر —</option><option>Zoom</option><option>Google Meet</option><option>مكالمة واتساب</option><option>اتصال مباشر</option></select></div>
+
+      <div style="grid-column:1 / -1;text-align:center;font-size:16px;font-weight:700;color:#1F5233;background:#eef3ec;border-radius:6px;padding:4px 8px;margin-top:4px">1.3 — الحضور</div>
+      <div style="grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start">
+
+        <div style="width:fit-content;max-width:100%;min-width:160px;box-sizing:border-box;background:#eef7f0;border:1.5px solid #1F5233;border-radius:8px;padding:8px 12px;display:flex;flex-direction:column;gap:8px">
+          <div style="color:#1F5233;font-weight:700">5. الحاضرون</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ presentsList }}" as="p" hint-placeholder-count="0"><span style="display:inline-flex;align-items:center;gap:4px;background:#ffffff;color:#1F5233;border:1px solid #1F5233;border-radius:999px;padding:2px 4px 2px 10px;font-size:16px">{{ p.name }}<button class="no-print" type="button" onClick="{{ p.rm }}" style="border:none;background:none;color:#8a2b2b;font-size:16px;cursor:pointer;padding:0 4px">×</button></span></sc-for>
+          </div>
+          <select class="no-print" onChange="{{ pickP }}" style="font-family:inherit;font-size:14px;color:#1d2a22;background:#ffffff;border:1px solid #1F5233;border-radius:6px;padding:2px 4px;outline:none">
+            <option value="">+ إضافة</option>
+            <sc-for list="{{ members }}" as="m" hint-placeholder-count="0"><option value="{{ m.name }}">{{ m.name }}</option></sc-for>
+          </select>
+        </div>
+
+        <div style="width:fit-content;max-width:100%;min-width:160px;box-sizing:border-box;background:#fbeaea;border:1.5px solid #b03a3a;border-radius:8px;padding:8px 12px;display:flex;flex-direction:column;gap:8px">
+          <div style="color:#b03a3a;font-weight:700">6. الغائبون</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ absentsList }}" as="p" hint-placeholder-count="0"><span style="display:inline-flex;align-items:center;gap:4px;background:#ffffff;color:#b03a3a;border:1px solid #b03a3a;border-radius:999px;padding:2px 4px 2px 10px;font-size:16px">{{ p.name }}<button class="no-print" type="button" onClick="{{ p.rm }}" style="border:none;background:none;color:#8a2b2b;font-size:16px;cursor:pointer;padding:0 4px">×</button></span></sc-for>
+          </div>
+          <select class="no-print" onChange="{{ pickA }}" style="font-family:inherit;font-size:14px;color:#1d2a22;background:#ffffff;border:1px solid #b03a3a;border-radius:6px;padding:2px 4px;outline:none">
+            <option value="">+ إضافة</option>
+            <sc-for list="{{ members }}" as="m" hint-placeholder-count="0"><option value="{{ m.name }}">{{ m.name }}</option></sc-for>
+          </select>
+        </div>
+
+        <div style="width:fit-content;max-width:100%;min-width:160px;box-sizing:border-box;background:#fff6cc;border:1.5px solid #D4AF37;border-radius:8px;padding:8px 12px;display:flex;flex-direction:column;gap:8px">
+          <div style="color:#8a6d00;font-weight:700">7. الاعتذارات</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{ excusedList }}" as="p" hint-placeholder-count="0"><span style="display:inline-flex;align-items:center;gap:4px;background:#ffffff;color:#8a6d00;border:1px solid #D4AF37;border-radius:999px;padding:2px 4px 2px 10px;font-size:16px">{{ p.name }}<button class="no-print" type="button" onClick="{{ p.rm }}" style="border:none;background:none;color:#8a2b2b;font-size:16px;cursor:pointer;padding:0 4px">×</button></span></sc-for>
+          </div>
+          <select class="no-print" onChange="{{ pickX }}" style="font-family:inherit;font-size:14px;color:#1d2a22;background:#ffffff;border:1px solid #D4AF37;border-radius:6px;padding:2px 4px;outline:none">
+            <option value="">+ إضافة</option>
+            <sc-for list="{{ members }}" as="m" hint-placeholder-count="0"><option value="{{ m.name }}">{{ m.name }}</option></sc-for>
+          </select>
+        </div>
+
+      </div>
+
+
+
+      <div class="no-print" style="grid-column:1 / -1;margin-top:4px;padding-top:8px;border-top:1px dashed #D4AF37">
+        <div style="font-size:15px;color:#5b6a60;margin-bottom:6px">قائمة الأعضاء (تظهر في القوائم أعلاه):</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input id="new-member" type="text" placeholder="اكتب اسم عضو" style="flex:1;font-family:inherit;font-size:16px;padding:4px 8px;border:1px solid #cfc7a6;border-radius:6px;outline:none">
+          <button type="button" onClick="{{ addMember }}" style="font-family:inherit;font-size:15px;color:#1F5233;background:#f6f1de;border:1px solid #D4AF37;border-radius:6px;padding:3px 12px;cursor:pointer">+ إضافة للقائمة</button>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+          <sc-for list="{{ members }}" as="m" hint-placeholder-count="0">
+            <span style="display:inline-flex;align-items:center;gap:4px;background:#eef3ec;color:#1F5233;border-radius:999px;padding:2px 4px 2px 10px;font-size:15px">{{ m.name }}<button type="button" onClick="{{ m.del }}" style="border:none;background:none;color:#8a2b2b;font-size:16px;cursor:pointer;padding:0 4px">×</button></span>
+          </sc-for>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div style="border:1.5px solid #1F5233;border-radius:8px;overflow:hidden;flex-shrink:0">
+    <div style="text-align:center;background:#1F5233;color:#ffffff;padding:6px 16px;font-size:18px;font-weight:700">2 — المحاور المناقشة</div>
+    <div style="padding:10px 18px;font-size:17px">
+      <sc-for list="{{ topics }}" as="t" hint-placeholder-count="4">
+        <div style="display:flex;align-items:flex-end;gap:12px;margin-bottom:6px"><span style="color:#D4AF37;font-weight:700;font-size:18px;width:20px">{{ t.n }}</span><span contentEditable="true" style="flex:1;border-bottom:1px dotted #8a9a8f;min-height:24px;outline:none"></span><button class="no-print" type="button" onClick="{{ t.del }}" style="border:none;background:none;color:#8a2b2b;font-size:20px;line-height:1;cursor:pointer;padding:0 4px">×</button></div>
+      </sc-for>
+      <button class="no-print" type="button" onClick="{{ addTopic }}" style="font-family:inherit;font-size:15px;color:#1F5233;background:#f6f1de;border:1px solid #D4AF37;border-radius:6px;padding:3px 12px;cursor:pointer">+ إضافة نقطة</button>
+    </div>
+  </div>
+
+  <div style="border:1.5px solid #1F5233;border-radius:8px;overflow:hidden;flex-shrink:0">
+    <div style="text-align:center;background:#1F5233;color:#ffffff;padding:6px 16px;font-size:18px;font-weight:700">3 — القرارات المتخذة</div>
+    <div style="padding:10px 18px;font-size:17px">
+      <sc-for list="{{ decisions }}" as="d" hint-placeholder-count="3">
+        <div style="display:flex;align-items:flex-end;gap:12px;margin-bottom:6px"><span style="width:16px;height:16px;border:1.5px solid #1F5233;border-radius:3px;flex-shrink:0;margin-bottom:4px"></span><span contentEditable="true" style="flex:1;border-bottom:1px dotted #8a9a8f;min-height:24px;outline:none"></span><button class="no-print" type="button" onClick="{{ d.del }}" style="border:none;background:none;color:#8a2b2b;font-size:20px;line-height:1;cursor:pointer;padding:0 4px">×</button></div>
+      </sc-for>
+      <button class="no-print" type="button" onClick="{{ addDecision }}" style="font-family:inherit;font-size:15px;color:#1F5233;background:#f6f1de;border:1px solid #D4AF37;border-radius:6px;padding:3px 12px;cursor:pointer">+ إضافة قرار</button>
+    </div>
+  </div>
+
+  <div style="border:1.5px solid #1F5233;border-radius:8px;overflow:hidden;flex-shrink:0">
+    <div style="text-align:center;background:#1F5233;color:#ffffff;padding:6px 16px;font-size:18px;font-weight:700">4 — الإجراءات المقررة</div>
+    <div style="padding:10px 18px;display:flex;flex-direction:column;gap:12px">
+
+      <div style="font-weight:700;color:#1F5233;font-size:17px">الإجراءات المتخذة</div>
+      <table style="width:100%;border-collapse:collapse;font-size:16px">
+        <thead><tr>
+          <th style="background:#f6f1de;color:#1F5233;font-weight:700;padding:8px 10px;border:1px solid #D4AF37;width:40px;text-align:center">#</th>
+          <th style="background:#f6f1de;color:#1F5233;font-weight:700;padding:8px 10px;border:1px solid #D4AF37;text-align:right">الإجراء</th>
+          <th style="background:#f6f1de;color:#1F5233;font-weight:700;padding:8px 10px;border:1px solid #D4AF37;width:25%;text-align:right">المسؤول</th>
+          <th style="background:#f6f1de;color:#1F5233;font-weight:700;padding:8px 10px;border:1px solid #D4AF37;width:25%;text-align:right">تاريخ التنفيذ</th>
+          <th class="no-print" style="background:#f6f1de;border:1px solid #D4AF37;width:36px"></th>
+        </tr></thead>
+        <tbody>
+          <sc-for list="{{ done }}" as="x2">
+            <tr>
+              <td style="border:1px solid #cfc7a6;text-align:center;color:#D4AF37;font-weight:700;padding:4px">{{ x2.n }}</td>
+              <td contentEditable="true" style="border:1px solid #cfc7a6;padding:4px 8px;height:28px;outline:none"></td>
+              <td style="border:1px solid #cfc7a6;padding:2px 4px"><select style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none"><option value="">— اختر —</option><sc-for list="{{ respNames }}" as="r" hint-placeholder-count="0"><option value="{{ r.name }}">{{ r.name }}</option></sc-for></select></td>
+              <td style="border:1px solid #cfc7a6;padding:2px 4px"><input type="date" style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none"></td>
+              <td class="no-print" style="border:1px solid #cfc7a6;text-align:center;padding:0"><button type="button" onClick="{{ x2.del }}" style="border:none;background:none;color:#8a2b2b;font-size:18px;cursor:pointer;padding:0 4px">×</button></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+      <button class="no-print" type="button" onClick="{{ addDone }}" style="align-self:flex-start;font-family:inherit;font-size:15px;color:#1F5233;background:#f6f1de;border:1px solid #D4AF37;border-radius:6px;padding:3px 12px;cursor:pointer">+ إضافة إجراء متخذ</button>
+
+      <div style="font-weight:700;color:#1F5233;font-size:17px;margin-top:6px">الإجراءات القادمة</div>
+      <table style="width:100%;border-collapse:collapse;font-size:16px">
+        <thead><tr>
+          <th style="background:#f6f1de;color:#1F5233;font-weight:700;padding:8px 10px;border:1px solid #D4AF37;width:40px;text-align:center">#</th>
+          <th style="background:#f6f1de;color:#1F5233;font-weight:700;padding:8px 10px;border:1px solid #D4AF37;text-align:right">الإجراء</th>
+          <th style="background:#f6f1de;color:#1F5233;font-weight:700;padding:8px 10px;border:1px solid #D4AF37;width:25%;text-align:right">المسؤول</th>
+          <th style="background:#f6f1de;color:#1F5233;font-weight:700;padding:8px 10px;border:1px solid #D4AF37;width:25%;text-align:right">الموعد النهائي</th>
+          <th class="no-print" style="background:#f6f1de;border:1px solid #D4AF37;width:36px"></th>
+        </tr></thead>
+        <tbody>
+          <sc-for list="{{ next }}" as="x2">
+            <tr>
+              <td style="border:1px solid #cfc7a6;text-align:center;color:#D4AF37;font-weight:700;padding:4px">{{ x2.n }}</td>
+              <td contentEditable="true" style="border:1px solid #cfc7a6;padding:4px 8px;height:28px;outline:none"></td>
+              <td style="border:1px solid #cfc7a6;padding:2px 4px"><select style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none"><option value="">— اختر —</option><sc-for list="{{ respNames }}" as="r" hint-placeholder-count="0"><option value="{{ r.name }}">{{ r.name }}</option></sc-for></select></td>
+              <td style="border:1px solid #cfc7a6;padding:2px 4px"><input type="date" style="width:100%;font-family:inherit;font-size:15px;border:none;background:transparent;outline:none"></td>
+              <td class="no-print" style="border:1px solid #cfc7a6;text-align:center;padding:0"><button type="button" onClick="{{ x2.del }}" style="border:none;background:none;color:#8a2b2b;font-size:18px;cursor:pointer;padding:0 4px">×</button></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+      <button class="no-print" type="button" onClick="{{ addNext }}" style="align-self:flex-start;font-family:inherit;font-size:15px;color:#1F5233;background:#f6f1de;border:1px solid #D4AF37;border-radius:6px;padding:3px 12px;cursor:pointer">+ إضافة إجراء قادم</button>
+    </div>
+  </div>
+
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</x-dc>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-<script>
-let data = {
-  date: '',
-  time: '',
-  location: '',
-  participants: [],
-  topics: [],
-  decisions: [],
-  actions: []
-};
-
-function addParticipant() {
-  const input = document.getElementById('participantName');
-  if (input.value.trim()) {
-    data.participants.push(input.value);
-    input.value = '';
-    updateUI();
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { topics: [1, 2, 3, 4], decisions: [1, 2, 3], done: [1, 2], next: [1, 2, 3], absentActs: [1], presents: [], absents: [], excused: [], members: [], calOpen: false, calY: 2026, calM: 9, selY: null, selM: null, selD: null, nid: 100 };
+  renderVals() {
+    const S = this.state;
+    const ar = n => String(n);
+    const del = (key, id) => () => this.setState(s => ({ [key]: s[key].filter(x => x !== id) }));
+    const add = key => () => this.setState(s => ({ [key]: [...s[key], s.nid], nid: s.nid + 1 }));
+    const rows = key => S[key].map((id, i) => ({ id, n: ar(i + 1), del: del(key, id) }));
+    const cat = key => S[key].map(name => ({ name, rm: () => this.setState(s => ({ [key]: s[key].filter(x => x !== name) })) }));
+    const pick = key => e => {
+      const v = e.target.value;
+      if (!v) return;
+      this.setState(s => ({ [key]: s[key].includes(v) ? s[key] : [...s[key], v] }));
+    };
+    return {
+      topics: rows('topics'),
+      decisions: rows('decisions'),
+      done: rows('done'),
+      next: rows('next'),
+      absentActs: rows('absentActs'),
+      addAbsentAct: add('absentActs'),
+      ...(() => {
+        const MON = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+        const cell = (sel) => `font-family:inherit;font-size:15px;color:${sel ? '#ffffff' : '#1d2a22'};background:${sel ? '#1F5233' : '#ffffff'};border:1px solid ${sel ? '#1F5233' : 'transparent'};border-radius:999px;width:100%;aspect-ratio:1;padding:0;cursor:pointer`;
+        const first = new Date(S.calY, S.calM, 1).getDay();
+        const dim = new Date(S.calY, S.calM + 1, 0).getDate();
+        const calCells = Array.from({ length: 42 }, (_, i) => {
+          const d = i - first + 1;
+          if (d < 1 || d > dim) return { label: '', style: 'visibility:hidden', pick: () => {} };
+          const sel = S.selD === d && S.selM === S.calM && S.selY === S.calY;
+          return { label: ar(d), style: cell(sel), pick: () => this.setState({ selY: S.calY, selM: S.calM, selD: d, calOpen: false }) };
+        });
+        return {
+          MON,
+          calCells,
+          calBoxStyle: S.calOpen ? '' : 'display:none;',
+          calTitle: `${MON[S.calM]} ${S.calY}`,
+          dateLabel: S.selD ? `${S.selD} ${MON[S.selM]} ${S.selY}` : 'اختر التاريخ',
+          toggleCal: () => this.setState(s => ({ calOpen: !s.calOpen })),
+          prevMonth: () => this.setState(s => s.calM === 0 ? { calM: 11, calY: s.calY - 1 } : { calM: s.calM - 1 }),
+          nextMonth: () => this.setState(s => s.calM === 11 ? { calM: 0, calY: s.calY + 1 } : { calM: s.calM + 1 }),
+        };
+      })(),
+      exportPdf: () => window.print(),
+      exportPng: async () => {
+        const element = document.querySelector('[data-screen-label="Rapport"]');
+        if (!element) {
+          alert('خطأ: لم يتم العثور على الوثيقة');
+          return;
+        }
+        try {
+          const canvas = await html2canvas(element, { scale: 2, backgroundColor: '#ffffff' });
+          const link = document.createElement('a');
+          link.href = canvas.toDataURL('image/png');
+          link.download = `rapport-reunion-${new Date().toISOString().split('T')[0]}.png`;
+          link.click();
+        } catch (e) {
+          alert('خطأ في تصدير PNG: ' + e.message);
+        }
+      },
+      durations: Array.from({ length: 36 }, (_, i) => ({ v: String((i + 1) * 5), l: `${(i + 1) * 5} دقيقة` })),
+      days: Array.from({ length: 31 }, (_, i) => ({ v: String(i + 1) })),
+      months: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'].map((name, i) => ({ v: String(i + 1), name })),
+      years: [2025, 2026, 2027, 2028, 2029, 2030].map(y => ({ v: String(y) })),
+      setDay: e => this.setState({ day: e.target.value }),
+      setMonth: e => this.setState({ month: e.target.value }),
+      setYear: e => this.setState({ year: e.target.value }),
+      presentsList: cat('presents'),
+      absentsList: cat('absents'),
+      excusedList: cat('excused'),
+      pickP: pick('presents'),
+      pickA: pick('absents'),
+      pickX: pick('excused'),
+      members: S.members.map(name => ({ name, del: () => this.setState(s => ({ members: s.members.filter(x => x !== name) })) })),
+      meetingNos: Array.from({ length: 30 }, (_, i) => ({ n: ar(i + 1) })),
+      respNames: S.presents.map(name => ({ name })),
+      addTopic: add('topics'),
+      addDecision: add('decisions'),
+      addDone: add('done'),
+      addNext: add('next'),
+      addMember: () => {
+        const el = document.getElementById('new-member');
+        const v = (el && el.value || '').trim();
+        if (!v) return;
+        this.setState(s => ({ members: [...s.members, v] }));
+        el.value = '';
+      },
+    };
   }
 }
 
-function addTopic() {
-  const input = document.getElementById('topicInput');
-  if (input.value.trim()) {
-    data.topics.push(input.value);
-    input.value = '';
-    updateUI();
-  }
-}
-
-function addDecision() {
-  const input = document.getElementById('decisionInput');
-  if (input.value.trim()) {
-    data.decisions.push(input.value);
-    input.value = '';
-    updateUI();
-  }
-}
-
-function addAction() {
-  const desc = document.getElementById('actionDesc').value;
-  const resp = document.getElementById('actionResponsible').value;
-  const deadline = document.getElementById('actionDeadline').value;
-
-  if (desc.trim() && resp.trim() && deadline) {
-    data.actions.push({ desc, resp, deadline });
-    document.getElementById('actionDesc').value = '';
-    document.getElementById('actionResponsible').value = '';
-    document.getElementById('actionDeadline').value = '';
-    updateUI();
-  }
-}
-
-function removeParticipant(i) {
-  data.participants.splice(i, 1);
-  updateUI();
-}
-
-function removeTopic(i) {
-  data.topics.splice(i, 1);
-  updateUI();
-}
-
-function removeDecision(i) {
-  data.decisions.splice(i, 1);
-  updateUI();
-}
-
-function removeAction(i) {
-  data.actions.splice(i, 1);
-  updateUI();
-}
-
-function updateUI() {
-  data.date = document.getElementById('meetingDate').value;
-  data.time = document.getElementById('meetingTime').value;
-  data.location = document.getElementById('location').value;
-
-  document.getElementById('participantsList').innerHTML = data.participants.map((p, i) =>
-    `<div class="item"><span>${p}</span><button class="item-delete" onclick="removeParticipant(${i})">✕</button></div>`
-  ).join('');
-
-  document.getElementById('topicsList').innerHTML = data.topics.map((t, i) =>
-    `<div class="item"><span>${t}</span><button class="item-delete" onclick="removeTopic(${i})">✕</button></div>`
-  ).join('');
-
-  document.getElementById('decisionsList').innerHTML = data.decisions.map((d, i) =>
-    `<div class="item"><span>${d}</span><button class="item-delete" onclick="removeDecision(${i})">✕</button></div>`
-  ).join('');
-
-  document.getElementById('actionsList').innerHTML = data.actions.map((a, i) =>
-    `<div class="item"><span>${a.desc} (${a.resp})</span><button class="item-delete" onclick="removeAction(${i})">✕</button></div>`
-  ).join('');
-
-  generatePreview();
-}
-
-function generatePreview() {
-  const isEmpty = !data.date && data.participants.length === 0 && data.topics.length === 0;
-
-  if (isEmpty) {
-    document.getElementById('reportPreview').innerHTML = '<div class="empty-preview">الرجاء ملء المعلومات للعرض المسبق...</div>';
-    return;
-  }
-
-  const dateObj = new Date(data.date + 'T00:00:00');
-  const dateStr = data.date ? dateObj.toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : '---';
-
-  const reportHTML = `
-    <div class="report">
-      <div class="report-header">
-        <div class="report-title">أكاديمية السيرة النبوية</div>
-        <div class="report-subtitle">تقرير الاجتماع</div>
-        <div class="report-date">${dateStr}</div>
-      </div>
-
-      <div class="section-box">
-        <div class="section-header">1 — بيانات الاجتماع</div>
-        <div class="section-content">
-          <div style="margin-bottom: 8px;"><strong>التاريخ:</strong> ${dateStr}</div>
-          <div style="margin-bottom: 8px;"><strong>الساعة:</strong> ${data.time || '---'}</div>
-          <div style="margin-bottom: 8px;"><strong>المكان:</strong> ${data.location || '---'}</div>
-          <div style="margin-bottom: 8px;"><strong>عدد الحاضرين:</strong> ${data.participants.length}</div>
-        </div>
-      </div>
-
-      ${data.participants.length > 0 ? `
-      <div class="section-box">
-        <div class="section-header">الحاضرون</div>
-        <div class="section-content">
-          <ul>${data.participants.map(p => `<li>${p}</li>`).join('')}</ul>
-        </div>
-      </div>
-      ` : ''}
-
-      ${data.topics.length > 0 ? `
-      <div class="section-box">
-        <div class="section-header">2 — المحاور المناقشة</div>
-        <div class="section-content">
-          <ul>${data.topics.map(t => `<li>${t}</li>`).join('')}</ul>
-        </div>
-      </div>
-      ` : ''}
-
-      ${data.decisions.length > 0 ? `
-      <div class="section-box">
-        <div class="section-header">3 — القرارات المتخذة</div>
-        <div class="section-content">
-          <ul>${data.decisions.map(d => `<li>${d}</li>`).join('')}</ul>
-        </div>
-      </div>
-      ` : ''}
-
-      ${data.actions.length > 0 ? `
-      <div class="section-box">
-        <div class="section-header">4 — الإجراءات المقررة</div>
-        <div class="section-content">
-          <div class="table-container">
-            <table>
-              <thead><tr>
-                <th>الإجراء</th>
-                <th>المسؤول</th>
-                <th>الموعد</th>
-              </tr></thead>
-              <tbody>
-                ${data.actions.map(a => `
-                  <tr>
-                    <td>${a.desc}</td>
-                    <td>${a.resp}</td>
-                    <td>${a.deadline}</td>
-                  </tr>
-                `).join('')}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      ` : ''}
-    </div>
-  `;
-
-  document.getElementById('reportPreview').innerHTML = reportHTML;
-}
-
-function downloadPDF() {
-  const reportElement = document.querySelector('.report');
-  if (!reportElement || !data.date) {
-    alert('الرجاء ملء التاريخ على الأقل');
-    return;
-  }
-
-  const dateStr = data.date.replace(/-/g, '');
-  const opt = {
-    margin: 10,
-    filename: `rapport-reunion-${dateStr}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
-  };
-
-  html2pdf().set(opt).from(reportElement).save();
-}
-
-function downloadPNG() {
-  const reportElement = document.querySelector('.report');
-  if (!reportElement || !data.date) {
-    alert('الرجاء ملء التاريخ على الأقل');
-    return;
-  }
-
-  html2canvas(reportElement, { scale: 2, backgroundColor: '#ffffff' }).then(canvas => {
-    const link = document.createElement('a');
-    const dateStr = data.date.replace(/-/g, '');
-    link.href = canvas.toDataURL('image/png');
-    link.download = `rapport-reunion-${dateStr}.png`;
-    link.click();
-  });
-}
-
-generatePreview();
 </script>
-
 </body>
 </html>
